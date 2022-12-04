@@ -23,7 +23,7 @@ schema_view = get_swagger_view(title='Location API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('forsquare_api.urls')),
-    path('swagger/', schema_view),
+    path('', schema_view),
 ]
 
 
