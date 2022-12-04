@@ -1,0 +1,1 @@
+# forsquare-location
