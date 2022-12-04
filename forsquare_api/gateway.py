@@ -23,11 +23,7 @@ class FoursquareGateway(object):
     def get_place_data(self, latitude, longitude):
         url = "{}places/search".format(settings.FOURSQUARE_BASE_URL)
         token = {"token": settings.FOURSQUARE_TOKEN}
-        import ipdb;ipdb.set_trace()
         params = self._get_params(**{"latitude": latitude, "longitude": longitude})
-
-        import ipdb;
-        ipdb.set_trace()
         headers = self._get_headers(**token)
 
         response = requests.request("GET", url, params=params, headers=headers)
