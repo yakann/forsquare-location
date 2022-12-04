@@ -11,6 +11,7 @@ class LocationService(object):
             name = place.get("name")
             location_data = place.get("location")
             fsq_id = place.get("fsq_id")
+
             if location_data:
                 address = location_data.get('formatted_address')
                 region = location_data.get('region')
@@ -22,6 +23,7 @@ class LocationService(object):
     def create_location(self, **kwargs):
         latitude = kwargs.get('latitude')
         longitude = kwargs.get('longitude')
+
         try:
             Location.objects.get(latitude=latitude, longitude=longitude)
             raise LocationDuplicatedFieldError(latitude, longitude)
@@ -29,7 +31,10 @@ class LocationService(object):
             raise LocationDuplicatedFieldError(latitude, longitude)
         except Location.DoesNotExist:
             pass
+
         places = self.gateway.get_place_data(latitude, longitude)
+
         if not places:
             raise FoursquareLocationNotFoundException
+
         self._create_location_fields(latitude, longitude, places)

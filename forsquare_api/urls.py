@@ -1,12 +1,14 @@
 from django.urls import path, include
+from rest_framework import routers
 
 from .views import LocationViewSet
 
-location_access_methods = {
-    'get': 'list',
-    'post': 'create'
-}
+app_name = 'forsquare_api'
+
+router = routers.DefaultRouter()
+router.register(r'locations', LocationViewSet)
 
 urlpatterns = [
-    path('locations/', LocationViewSet.as_view(location_access_methods), name='locations'),
 ]
+
+urlpatterns += router.urls

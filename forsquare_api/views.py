@@ -12,12 +12,15 @@ class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
     service = LocationService()
+    http_method_names = ['delete', 'get', 'post']
 
     def get_serializer_class(self):
         if self.action == 'list':
             return LocationListSerializer
         if self.action == 'create':
             return LocationSerializer
+        if self.action == 'retrieve':
+            return LocationListSerializer
 
     def perform_create(self, serializer):
         validated_data = serializer.validated_data
@@ -26,6 +29,7 @@ class LocationViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
         try:
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
