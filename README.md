@@ -3,8 +3,8 @@
 ## Start
 There is two ways to run project
 
-* docker-compose up
-* below commands respectively run 
+1 docker-compose up
+2 below commands respectively run 
   - `python manage.py migrate`
   - `python manage.py runserver 8080`
   
